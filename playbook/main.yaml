@@ -1,0 +1,67 @@
+- name: Build 
+  hosts: plex
+  vars_files:
+    - vars.yaml
+  tasks:                
+    - name: Install apt packages
+      apt:
+        update_cache: yes
+        name: "{{ item }}"
+      loop:              
+        - plexmedia
+        - curl
+        - ncdu                
+        - vim
+        - nfs-common   
+      become: true   
+
+    - name: Check if NFS share directory /mnt/yes/music exists
+      ansible.builtin.stat:
+        path: "{{ nfs_shares[0][1] }}"  
+      register: music_dir_stat
+      become: true
+
+    - name: Create NFS share directories      
+      file:
+        path: "{{ item[1] }}" 
+        state: directory
+        owner: kevin
+        group: kevin
+        mode: "0755"
+      loop: "{{ nfs_shares }}"
+      when: not music_dir_stat.stat.exists
+      become: true
+    
+    - name: Add NFS share entries to /etc/fstab
+      blockinfile:
+        path: /etc/fstab
+        block: |
+          {% for share in nfs_shares %}
+          {{ share[0] }}    {{ share[1] }}    nfs    defaults,rw    0 0
+          {% endfor %}
+      become: true
+
+    - name: Mount all nfs
+      ansible.builtin.command:
+        cmd: mount -a -t nfs
+      become: true
+
+    - name: Check if the install deb already exists
+      ansible.builtin.stat:
+        path: "{{ work_dir }}/{{ base_file }}"
+      register: file_stat
+      become: true
+
+    - name: Download the latest plex installation deb
+      ansible.builtin.get_url:
+        url: "{{ crashplan_download }}"
+        dest: "{{ work_dir }}/{{ base_file }}"
+      become: true
+      when: not file_stat.stat.exists
+
+    # - name: Install the downloaded plexmediaserver[whatever].deb file
+    #   ansible.builtin.deb:
+    #     deb: "{{ work_dir }}/{{ base_file }}"
+    #   become: true
+    #   when: not file_stat.stat.exists
+    
