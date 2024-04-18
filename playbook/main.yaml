@@ -59,8 +59,9 @@
       when: not file_stat.stat.exists
 
     - name: Install the downloaded plexmediaserver[whatever].deb file
-      ansible.builtin.deb:
-        deb: "{{ work_dir }}/{{ base_file }}"
+      delegate_to: app1
+      apt:
+        deb: "{{ work_dir }}/{{ base_file }}"            
       become: true
       #when: not file_stat.stat.exists
     
