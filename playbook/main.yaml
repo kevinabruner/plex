@@ -7,8 +7,7 @@
       apt:
         update_cache: yes
         name: "{{ item }}"
-      loop:              
-        - plexmedia
+      loop:                      
         - curl
         - ncdu                
         - vim
