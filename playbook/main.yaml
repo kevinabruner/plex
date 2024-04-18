@@ -64,11 +64,7 @@
         deb: "{{ work_dir }}/{{ base_file }}"            
       become: true
       when: not file_stat.stat.exists
-    
-
-    - name: Change directory to /opt
-      ansible.builtin.command:
-        cmd: cd /opt
+        
 
     - name: Clone Tautulli repository
       ansible.builtin.git:
