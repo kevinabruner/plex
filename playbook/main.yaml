@@ -73,6 +73,12 @@
         dest: /opt/Tautulli
       become: true
 
+    - name: Create tautulli group
+      ansible.builtin.group:
+        name: tautulli
+        state: present
+      become: true
+
     - name: Add Tautulli user
       ansible.builtin.user:
         name: tautulli
