@@ -20,14 +20,14 @@
       register: music_dir_stat
       become: true
 
-    - name: Create NFS share directories      
+    - name: Create local NFS share directories      
       file:
-        path: "{{ item[1] }}" 
+        path: "{{ item }}" 
         state: directory
         owner: kevin
         group: kevin
         mode: "0755"
-      loop: "{{ nfs_shares }}"
+      loop: "{{ local_nfs_shares }}"
       when: not music_dir_stat.stat.exists
       become: true
     
