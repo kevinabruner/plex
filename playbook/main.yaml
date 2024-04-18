@@ -12,6 +12,7 @@
         - ncdu                
         - vim
         - nfs-common   
+
       become: true   
 
     - name: Check if NFS share directory /mnt/yes/music exists
@@ -62,5 +63,50 @@
       apt:
         deb: "{{ work_dir }}/{{ base_file }}"            
       become: true
-      #when: not file_stat.stat.exists
+      when: not file_stat.stat.exists
     
+
+    - name: Change directory to /opt
+      ansible.builtin.command:
+        cmd: cd /opt
+
+    - name: Clone Tautulli repository
+      ansible.builtin.git:
+        repo: https://github.com/Tautulli/Tautulli.git
+        dest: /opt/Tautulli
+
+    - name: Add Tautulli user
+      ansible.builtin.user:
+        name: tautulli
+        state: present
+        system: yes
+        group: tautulli
+      become: true      
+
+    - name: Change ownership of Tautulli directory
+      ansible.builtin.file:
+        path: /opt/Tautulli
+        owner: tautulli
+        group: tautulli
+        recurse: yes
+      become: true
+
+    - name: Copy the service script
+      ansible.builtin.copy:
+        src: /opt/Tautulli/init-scripts/init.systemd
+        dest: /lib/systemd/system/tautulli.service
+        remote_src: yes
+      become: true
+
+    - name: Reload systemd daemon and enable Tautulli service
+      ansible.builtin.systemd:
+        daemon_reload: yes
+        enabled: yes
+        name: tautulli.service
+      become: true
+
+    - name: Start Tautulli service
+      ansible.builtin.service:
+        name: tautulli
+        state: started
+      become: true
