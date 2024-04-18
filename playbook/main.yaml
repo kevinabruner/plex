@@ -28,7 +28,7 @@
         group: kevin
         mode: "0755"
       loop: "{{ local_nfs_shares }}"
-#      when: not music_dir_stat.stat.exists
+      when: not music_dir_stat.stat.exists
       become: true
     
     - name: Add NFS share entries to /etc/fstab
@@ -58,9 +58,9 @@
       become: true
       when: not file_stat.stat.exists
 
-    # - name: Install the downloaded plexmediaserver[whatever].deb file
-    #   ansible.builtin.deb:
-    #     deb: "{{ work_dir }}/{{ base_file }}"
-    #   become: true
-    #   when: not file_stat.stat.exists
+    - name: Install the downloaded plexmediaserver[whatever].deb file
+      ansible.builtin.deb:
+        deb: "{{ work_dir }}/{{ base_file }}"
+      become: true
+      #when: not file_stat.stat.exists
     
