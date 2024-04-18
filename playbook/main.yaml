@@ -12,7 +12,8 @@
         - ncdu                
         - vim
         - nfs-common   
-
+        - git 
+        - python3-setuptools
       become: true   
 
     - name: Check if NFS share directory /mnt/yes/music exists
