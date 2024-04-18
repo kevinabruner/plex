@@ -53,7 +53,7 @@
 
     - name: Download the latest plex installation deb
       ansible.builtin.get_url:
-        url: "{{ crashplan_download }}"
+        url: "{{ plex_download }}"
         dest: "{{ work_dir }}/{{ base_file }}"
       become: true
       when: not file_stat.stat.exists
