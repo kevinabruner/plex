@@ -70,6 +70,7 @@
       ansible.builtin.git:
         repo: https://github.com/Tautulli/Tautulli.git
         dest: /opt/Tautulli
+      become: true
 
     - name: Add Tautulli user
       ansible.builtin.user:
