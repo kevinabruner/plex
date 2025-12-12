@@ -80,39 +80,6 @@
         group: tautulli
       become: true      
 
-    # - name: Change ownership of Tautulli directory
-    #   ansible.builtin.file:
-    #     path: /opt/Tautulli
-    #     owner: tautulli
-    #     group: tautulli
-    #     recurse: yes
-    #   become: true
-
-    # - name: Clone Tautulli repository to Controller
-    #   ansible.builtin.git:
-    #     repo: https://github.com/Tautulli/Tautulli.git
-    #     dest: /tmp/tautulli_clone_temp
-    #     force: yes 
-    #   delegate_to: localhost 
-    #   run_once: true 
-
-    # - name: Copy Tautulli files from Controller to Target
-    #   ansible.builtin.copy:
-    #     src: /tmp/tautulli_clone_temp/
-    #     dest: /opt/Tautulli/
-    #     owner: tautulli
-    #     group: tautulli
-    #     mode: '0755'
-    #     directory_mode: '0755'
-    #   become: true 
-
-    # - name: Clean up temporary clone directory on Controller
-    #   ansible.builtin.file:
-    #     path: /tmp/tautulli_clone_temp
-    #     state: absent
-    #   delegate_to: localhost
-    #   run_once: true
-
     - name: Copy the service script
       ansible.builtin.copy:
         src: /opt/Tautulli/init-scripts/init.systemd
