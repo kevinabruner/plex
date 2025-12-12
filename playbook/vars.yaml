@@ -11,7 +11,6 @@ nfs_shares:
   - ["{{ nfs_server }}:/mnt/yes/media/tv", "/mnt/yes/TV"]
   - ["{{ nfs_server }}:/mnt/yes/gitbuilds/plex", "/var/lib/plexmediaserver/Library/Application\\040Support/Plex\\040Media\\040Server/"]
   - ["{{ nfs_server }}:/mnt/yes/gitbuilds/tautulli", "/opt/Tautulli"]
-
 local_nfs_shares:
   - "/mnt/yes/music"
   - "/mnt/yes/movies"
