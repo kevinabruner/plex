@@ -87,7 +87,7 @@
         group: tautulli
         recurse: yes
       become: true
-      ansible_become_flags: '-H'
+        ansible_become_flags: '-H'
 
     - name: Clone Tautulli repository
       ansible.builtin.git:
