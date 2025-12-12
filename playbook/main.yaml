@@ -92,7 +92,10 @@
       ansible.builtin.git:
         repo: https://github.com/Tautulli/Tautulli.git
         dest: /opt/Tautulli
-      become: true 
+        accept_hostkey: yes 
+      become: true
+      become_user: tautulli
+      ansible_become_flags: '-H'
 
     - name: Copy the service script
       ansible.builtin.copy:
