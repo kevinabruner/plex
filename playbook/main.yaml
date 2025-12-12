@@ -93,7 +93,6 @@
         repo: https://github.com/Tautulli/Tautulli.git
         dest: /opt/Tautulli
       become: true 
-      become_user: tautulli
 
     - name: Copy the service script
       ansible.builtin.copy:
