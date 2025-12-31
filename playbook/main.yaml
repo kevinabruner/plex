@@ -1,5 +1,5 @@
 - name: Build 
-  hosts: plex
+  hosts: repo_plex
   vars_files:
     - vars.yaml
   tasks:                
