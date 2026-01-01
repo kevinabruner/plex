@@ -38,7 +38,7 @@
         path: /etc/fstab
         block: |
           {% for share in nfs_shares %}
-          {{ share[0] }}    {{ share[1] }}    nfs    defaults,rw    0 0
+          {{ share[0] }}    {{ share[1] }}    nfs    {{ nfs_options | join(',') }}    0 0
           {% endfor %}
       become: true
 
