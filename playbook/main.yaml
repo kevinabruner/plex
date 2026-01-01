@@ -87,6 +87,15 @@
         remote_src: yes
       become: true
 
+    - name: Add 90 second delay to Tautulli service
+      ansible.builtin.lineinfile:
+        path: /lib/systemd/system/tautulli.service
+        insertbefore: '^ExecStart='
+        line: 'ExecStartPre=/bin/sleep 90'
+        state: present
+      become: true
+      notify: Reload systemd
+  
     - name: Reload systemd daemon and enable Tautulli service
       ansible.builtin.systemd:
         daemon_reload: yes
