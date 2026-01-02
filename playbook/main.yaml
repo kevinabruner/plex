@@ -94,7 +94,6 @@
         line: 'ExecStartPre=/bin/sleep 90'
         state: present
       become: true
-      notify: Reload systemd
   
     - name: Reload systemd daemon and enable Tautulli service
       ansible.builtin.systemd:
