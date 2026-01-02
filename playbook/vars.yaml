@@ -17,3 +17,11 @@ local_nfs_shares:
   - "/mnt/yes/TV"
   - "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/"
   - "/opt/Tautulli"
+nfs_options:
+  - defaults
+  - x-systemd.automount
+  - x-systemd.idle-timeout=60s
+  - soft
+  - timeo=14
+  - retrans=2
+  - _netdev
