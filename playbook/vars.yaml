@@ -4,7 +4,7 @@ work_dir: "/home/{{ ANSIBLE_USER }}"
 git_dir: "{{ work_dir }}/{{ APPLICATION }}"
 plex_download: https://downloads.plex.tv/plex-media-server-new/1.42.2.10156-f737b826c/debian/plexmediaserver_1.42.2.10156-f737b826c_amd64.deb
 base_file: plexmediaserver.deb
-nfs_server: 192.168.10.20
+nfs_server: 192.168.11.20
 nfs_shares:
   - ["{{ nfs_server }}:/mnt/yes/media/music", "/mnt/yes/music"]
   - ["{{ nfs_server }}:/mnt/yes/media/movies", "/mnt/yes/movies"]
