@@ -16,7 +16,6 @@
     url: "{{ plex_download }}"
     dest: "{{ work_dir }}/{{ base_file }}"
   become: true
-  when: not file_stat.stat.exists
 
 - name: Create tautulli group
   ansible.builtin.group:
