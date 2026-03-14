@@ -17,7 +17,7 @@ nfs_mounts:
     src: "{{ nfs_server }}:/mnt/yes/media/music"
   - path: "/mnt/yes/movies"
     src: "{{ nfs_server }}:/mnt/yes/media/movies"
-  - path: "/var/lib/plexmediaserver/Library/Application\\040Support/Plex\\040Media\\040Server/" 
+  - path: "/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/" 
     src: "{{ nfs_server }}:/mnt/yes/gitbuilds/plex"
   - path: "/opt/Tautulli"
     src: "{{ nfs_server }}:/mnt/yes/gitbuilds/tautulli"
