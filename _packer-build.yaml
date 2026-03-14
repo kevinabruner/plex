@@ -1,0 +1,5 @@
+- name: Install plex application
+  hosts: all
+  roles:
+    - plex_deps
+    - plex_storage 

@@ -1,0 +1,35 @@
+
+  tasks:                
+    - name: Install apt packages
+      apt:
+        update_cache: yes
+        name: "{{ item }}"
+      loop:                      
+        - curl
+        - ncdu                
+        - vim
+        - nfs-common   
+        - git 
+        - python3-setuptools
+      become: true   
+
+    - name: Download the latest plex installation deb
+      ansible.builtin.get_url:
+        url: "{{ plex_download }}"
+        dest: "{{ work_dir }}/{{ base_file }}"
+      become: true
+      when: not file_stat.stat.exists
+
+    - name: Create tautulli group
+      ansible.builtin.group:
+        name: tautulli
+        state: present
+      become: true
+
+    - name: Add Tautulli user
+      ansible.builtin.user:
+        name: tautulli
+        state: present
+        system: yes
+        group: tautulli
+      become: true      

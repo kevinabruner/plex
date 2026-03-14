@@ -1,0 +1,5 @@
+- name: Build 
+  hosts: repo_plex
+  roles:
+    - plex_deps
+    - plex_storage

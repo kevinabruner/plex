@@ -1,0 +1,29 @@
+nfs_shares:
+  - ["{{ nfs_server }}:/mnt/yes/media/music", "/mnt/yes/music"]
+  - ["{{ nfs_server }}:/mnt/yes/media/movies", "/mnt/yes/movies"]
+  - ["{{ nfs_server }}:/mnt/yes/media/tv", "/mnt/yes/TV"]
+  - ["{{ nfs_server }}:/mnt/yes/gitbuilds/plex", "/var/lib/plexmediaserver/Library/Application\\040Support/Plex\\040Media\\040Server/"]
+  - ["{{ nfs_server }}:/mnt/yes/gitbuilds/tautulli", "/opt/Tautulli"]
+nfs_server: 192.168.11.20
+nfs_options:
+  - defaults
+  - x-systemd.automount
+  - x-systemd.idle-timeout=60s
+  - soft
+  - timeo=14
+  - retrans=2
+  - _netdev
+  - noauto
+nfs_mounts:
+  - path: "/opt/downloads"
+    src: "{{ nfs_server }}:/mnt/yes/plex/downloads"    
+  - path: "/mnt/yes/TV"     
+    src: "{{ nfs_server }}:/mnt/yes/media/tv"
+  - path: "/mnt/yes/music"
+    src: "{{ nfs_server }}:/mnt/yes/media/music"
+  - path: "/mnt/yes/movies"
+    src: "{{ nfs_server }}:/mnt/yes/media/movies"
+  - path: "/var/lib/plexmediaserver/Library/Application\\040Support/Plex\\040Media\\040Server/" 
+    src: "{{ nfs_server }}:/mnt/yes/gitbuilds/plex"
+  - path: "/opt/Tautulli"
+    src: "{{ nfs_server }}:/mnt/yes/gitbuilds/tautulli"
