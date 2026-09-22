@@ -3,3 +3,4 @@
   roles:
     - plex_deps
     - plex_storage 
+    - first_boot
