@@ -32,11 +32,6 @@ variable "proxmox_api_token_secret" {
   sensitive = true
 }
 
-variable "target_app" {
-  type    = string
-  # No default, must be an argument
-}
-
 variable "proxmox_api_url" { type = string }
 
 variable "clone_template_name" {
@@ -89,10 +84,6 @@ build {
     ansible_env_vars = [
       "ANSIBLE_ROLES_PATH=./roles",
       "ANSIBLE_HOST_KEY_CHECKING=False"
-    ]
-    # Pass target_app variable
-    extra_arguments = [
-      "--extra-vars", "target_app=${var.target_app}"
     ]
   }
 
